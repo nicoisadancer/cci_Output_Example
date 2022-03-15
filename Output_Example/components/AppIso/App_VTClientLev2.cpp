@@ -291,12 +291,11 @@ void VTC_handleSoftkeysAndButton_Q1(const struct ButtonActivation_S *pButtonData
 	switch (pButtonData->keyActivationCode) {
 
 
-	case BUTTON_STATE_PRESSED:
 	case BUTTON_STATE_HELD:
 		RS1(true,false);
 		break;
 
-
+	case BUTTON_STATE_PRESSED:
 	case BUTTON_STATE_RELEASED:
 	case BUTTON_STATE_ABORTED:
 		RS1(false,true);
