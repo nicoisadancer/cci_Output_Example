@@ -45,7 +45,6 @@ static const char *TAG = "App_VTClientLev2";
 #include "ExtraLib.h"
 #include "BasicLib.h"
 
-
 //********************************************************************************************
 // Each command has several Unique Features. here they are encapsulated !
 //********************************************************************************************
@@ -283,24 +282,29 @@ void AppVTClientDoProcess(const ISOVT_EVENT_DATA_T* psEvData)
 
 
 }
+TON TON1;
+
 
 RS RS1;
 
 void VTC_handleSoftkeysAndButton_Q1(const struct ButtonActivation_S *pButtonData) {
-
+	TON1.PT = 1000;
 	switch (pButtonData->keyActivationCode) {
 
 
 	case BUTTON_STATE_HELD:
-		RS1(true,false);
+		TON1(true);
+		RS1(TON1.Q,false);
 		break;
 
 	case BUTTON_STATE_PRESSED:
-	case BUTTON_STATE_RELEASED:
-	case BUTTON_STATE_ABORTED:
+		TON1(false);
 		RS1(false,true);
 		break;
 
+	case BUTTON_STATE_RELEASED:
+	case BUTTON_STATE_ABORTED:
+		break;
 
 	}
 	gpio_set_level(GPIO_Q1, RS1.Q1);
