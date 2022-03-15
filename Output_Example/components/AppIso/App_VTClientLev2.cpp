@@ -212,7 +212,7 @@ void VTC_setPoolReady(const ISOVT_EVENT_DATA_T* psEvData)
 
 
 #define BUTTON_I1 GPIO_NUM_32		// Pin 32.
-#define BUTTON_I2 GPIO_NUM_39		// Pin 39.
+#define BUTTON_I2 GPIO_NUM_26		// Pin 26.
 #define GPIO_Q1 GPIO_NUM_19
 #define GPIO_Q2 GPIO_NUM_23
 #define GPIO_Q3 GPIO_NUM_33
@@ -251,6 +251,7 @@ void init_GPIO(void)
 static int I1 = 0;
 static int I2 = 0;
 CYCLE_4_TAP CYCLE_4A;
+CYCLE_4_TAP CYCLE_4B;
 
 /* ************************************************************************ */
 void AppVTClientDoProcess(const ISOVT_EVENT_DATA_T* psEvData)
@@ -273,6 +274,11 @@ void AppVTClientDoProcess(const ISOVT_EVENT_DATA_T* psEvData)
 	if (CYCLE_4A.Q1) IsoVtcCmd_CtrlAudioSignal(psEvData->u8Instance, 1, 940, 1000, 0);
 	if (CYCLE_4A.Q2) IsoVtcCmd_CtrlAudioSignal(psEvData->u8Instance, 1, 1030, 500, 0);
 
+
+	CYCLE_4B(I2);
+		if (CYCLE_4B.Q0) IsoVtcCmd_CtrlAudioSignal(psEvData->u8Instance, 1, 250,  500, 0);
+		if (CYCLE_4B.Q1) IsoVtcCmd_CtrlAudioSignal(psEvData->u8Instance, 1, 600, 1000, 0);
+		if (CYCLE_4B.Q2) IsoVtcCmd_CtrlAudioSignal(psEvData->u8Instance, 1, 987, 500, 0);
 
 
 
